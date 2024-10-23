@@ -1,0 +1,95 @@
+import express, { Request, Response } from "express";
+
+import authRoute from "./routes/authRoute";
+import chatListRoute from "./routes/chatListRoute";
+import connectDB from "./config/db";
+import conversationRoute from "./routes/conversationRoute";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import { corsOptions } from "./config/corsOptions";
+import { createServer } from "http";
+import dotenv from "dotenv";
+import { downLoadFile } from "./utils/downloadFile";
+import friendRequestRoute from "./routes/friendRequestRoute";
+import { initSocket } from "./services/socket";
+import messageRoute from "./routes/messageRoute";
+import path from "path";
+import { runServerOnCrash } from "./utils/runServerOnCrash";
+import sideProfileRoute from "./routes/sideProfile";
+import uploadRoute from "./routes/uploadRoute";
+import userRoute from "./routes/userRoute";
+import verifyJWT from "./middlewares/verifyJWT";
+
+//Load environment variables
+dotenv.config();
+
+//Initialize Express App
+const app = express();
+
+//connect to database
+connectDB();
+
+//middleware
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use(cookieParser());
+
+// define  routes
+app.get("/", (req: Request, res: Response) => {
+  res.send("Socket.io ChatApp Server is Running...");
+});
+
+// Routes
+app.use("/api/auth", authRoute);
+app.use("/api/user", verifyJWT, userRoute);
+app.use("/api/chatlist", verifyJWT, chatListRoute);
+app.use("/api/conversation", verifyJWT, conversationRoute);
+app.use("/api/friendRequest", verifyJWT, friendRequestRoute);
+app.use("/api/message", verifyJWT, messageRoute);
+app.use("/api/profile", verifyJWT, sideProfileRoute);
+
+app.use(
+  "/api/upload",
+  express.static(path.join(__dirname, "./upload")),
+  verifyJWT,
+  uploadRoute
+);
+app.get(
+  "/api/download/:filename",
+  express.static(path.join(__dirname, "./upload")),
+  verifyJWT,
+  downLoadFile
+);
+
+// server files for frontend access
+app.use(
+  "/api/file",
+  express.static(path.join(__dirname, "./upload")),
+  (req, res) => {
+    res.json(200);
+  }
+);
+
+// 404 not found
+app.all("*", (req, res) => {
+  res.status(404);
+  if (req.accepts("html")) {
+    res.sendFile(path.join(__dirname, "views", "404.html"));
+  } else if (req.accepts("json")) {
+    res.json({ error: "404 Not Found" });
+  } else {
+    res.type("txt").send("404 Not Found");
+  }
+});
+
+// server not crash
+runServerOnCrash();
+
+// start the server
+const PORT = process.env.PORT || 5000;
+// const httpServer = createServer(app);
+// initSocket(httpServer); // socket
+
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT} http://localhost:${PORT}`)
+);
