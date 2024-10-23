@@ -33,16 +33,6 @@ const GlassEffectBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const backgroundStyles = {
-  display: "inline-block",
-  objectFit: "cover",
-  minWidth: "100%",
-  minHeight: "100vh",
-  width: "100%",
-  height: "100vh",
-  objectPosition: "top",
-};
-
 const AuthenticationPage = () => {
   return (
     <StyledAuthentication>
@@ -62,7 +52,19 @@ const AuthenticationPage = () => {
           <source media="(min-width:1920px)" srcSet={bg_1920} />
           <source media="(min-width:1280px)" srcSet={bg_1280} />
           <source media="(min-width:640px)" srcSet={bg_640} />
-          <img src={bg_640} alt="background" style={backgroundStyles} />
+          <img
+            src={bg_640}
+            alt="background"
+            style={{
+              display: "inline-block",
+              objectFit: "cover",
+              minWidth: "100%",
+              minHeight: "100vh",
+              width: "100%",
+              height: "100vh",
+              objectPosition: "top",
+            }}
+          />
         </picture>
       </Box>
 

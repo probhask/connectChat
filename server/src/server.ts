@@ -8,9 +8,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { corsOptions } from "./config/corsOptions";
 import { createServer } from "http";
+import cron from "node-cron";
 import dotenv from "dotenv";
 import { downLoadFile } from "./utils/downloadFile";
 import friendRequestRoute from "./routes/friendRequestRoute";
+import https from "https";
 import { initSocket } from "./services/socket";
 import messageRoute from "./routes/messageRoute";
 import path from "path";
@@ -33,6 +35,26 @@ connectDB();
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
+// ping server before 15min
+cron.schedule("*/14 * * * * ", () => {
+  console.log("restarting server");
+
+  https
+    .get(process.env.BACKEND_URL as string, (res) => {
+      if (res.statusCode === 200) {
+        console.log("server restarted");
+      } else {
+        console.error(
+          "failed to restart server with status code",
+          res.statusCode
+        );
+      }
+    })
+    .on("error", (err) => {
+      console.error("error during restart: ", err.message);
+    });
+});
 
 // define  routes
 app.get("/", (req: Request, res: Response) => {
