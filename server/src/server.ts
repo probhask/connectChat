@@ -31,7 +31,7 @@ const app = express();
 //connect to database
 connectDB();
 
-//middleware
+//middlewarec
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());

@@ -1,53 +1,53 @@
-import { Socket, io } from "socket.io-client";
-import { createContext, useContext, useEffect, useMemo } from "react";
+// // import { Socket, io } from "socket.io-client";
+// import { createContext, useContext, useEffect, useMemo } from "react";
 
-import { useChatAppSelector } from "@store/hooks";
+// import { useChatAppSelector } from "@store/hooks";
 
-type SocketContextType = {
-  socket: Socket;
-};
+// type SocketContextType = {
+//   socket: Socket;
+// };
 
-export const SocketContext = createContext<SocketContextType | undefined>(
-  undefined
-);
+// export const SocketContext = createContext<SocketContextType | undefined>(
+//   undefined
+// );
 
-export const SocketContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const socket = useMemo(() => io("http://localhost:5000"), []);
-  const user = useChatAppSelector((store) => store.auth);
+// export const SocketContextProvider = ({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) => {
+//   const socket = useMemo(() => io("import.meta.env.BACKEND_URL:5000"), []);
+//   const user = useChatAppSelector((store) => store.auth);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("user connected", socket.id);
-      if (user?.accessToken) {
-        socket.emit("authenticate", user.accessToken);
-      }
-    });
+//   useEffect(() => {
+//     socket.on("connect", () => {
+//       console.log("user connected", socket.id);
+//       if (user?.accessToken) {
+//         socket.emit("authenticate", user.accessToken);
+//       }
+//     });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [user, socket]);
+//     return () => {
+//       socket.disconnect();
+//     };
+//   }, [user, socket]);
 
-  return (
-    <SocketContext.Provider value={{ socket }}>
-      {children}
-    </SocketContext.Provider>
-  );
-};
+//   return (
+//     <SocketContext.Provider value={{ socket }}>
+//       {children}
+//     </SocketContext.Provider>
+//   );
+// };
 
-const useSocketContext = () => {
-  const context = useContext(SocketContext);
+// const useSocketContext = () => {
+//   const context = useContext(SocketContext);
 
-  if (!context) {
-    throw new Error(
-      "useSocketContext hook must be used within SocketContextProvider"
-    );
-  }
-  return context;
-};
+//   if (!context) {
+//     throw new Error(
+//       "useSocketContext hook must be used within SocketContextProvider"
+//     );
+//   }
+//   return context;
+// };
 
-export default useSocketContext;
+// export default useSocketContext;

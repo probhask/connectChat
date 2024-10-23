@@ -37,8 +37,8 @@ const ChatPreviewList = React.memo(() => {
       <List sx={{ pt: 0 }} className="hide-scrollbar">
         {!chatListError &&
           chatList &&
-          chatList.length > 0 &&
-          chatList.map(({ conversation, lastMessage, otherUser }) => {
+          chatList?.length > 0 &&
+          chatList?.map(({ conversation, lastMessage, otherUser }) => {
             // const isGroupChat = conversation.isGroupChat;
             return (
               <ChatListItem

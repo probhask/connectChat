@@ -73,20 +73,9 @@ const MessageMediaDisplay = React.memo(
               effect="opacity"
               // height={"200px"}
               // width={"300px"}
-              src={`http://localhost:5000/api/file/${media?.fileName}`}
+              src={`${import.meta.env.BACKEND_URL}/api/file/${media?.fileName}`}
               style={{ objectFit: "contain", maxHeight: "300px" }}
             />
-            {/* <Box
-              component="img"
-              src={`http://localhost:5000/api/file/${media?.fileName}`}
-              sx={{
-                objectFit: "cover",
-                width: "100%",
-                height: "100%",
-              }}
-              loading="lazy"
-              onLoad={onMediaLoad}
-            /> */}
             <IconButton
               sx={{ position: "absolute", bottom: 0, right: 0 }}
               onClick={() => {

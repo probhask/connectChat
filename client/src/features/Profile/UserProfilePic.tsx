@@ -46,7 +46,9 @@ const UserProfilePic = React.memo(() => {
       <StyledUserAvatar
         src={
           user?.profile_picture?.fileName
-            ? `http://localhost:5000/api/file/${user?.profile_picture?.fileName}`
+            ? `${import.meta.env.BACKEND_URL}/api/file/${
+                user?.profile_picture?.fileName
+              }`
             : ""
         }
         // alt={user?.username}

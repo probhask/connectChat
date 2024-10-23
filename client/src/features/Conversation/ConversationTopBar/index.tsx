@@ -119,7 +119,7 @@ const ConversationTopBar = React.memo(() => {
       <ProfileInfo>
         <IconButton onClick={() => navigateToUser(getUserProfileId)}>
           <Avatar
-            src={`http://localhost:5000/api/file/${avatarImage}`}
+            src={`${import.meta.env.BACKEND_URL}/api/file/${avatarImage}`}
             sx={{ width: 35, height: 35 }}
           />
         </IconButton>

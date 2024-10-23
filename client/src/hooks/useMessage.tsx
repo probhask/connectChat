@@ -9,7 +9,8 @@ import useChatAppContext from "@context/index";
 import useFetchData from "./useFetchData";
 import useMessageContext from "@context/messageContext";
 import useRefresh from "./useRefresh";
-import useSocketContext from "@context/SocketContext";
+
+// import useSocketContext from "@context/SocketContext";
 
 const updateDocPreview = (uploadedFileName: string): DOC_PREVIEW => {
   console.log("file Name: " + uploadedFileName);
@@ -30,7 +31,7 @@ const useMessage = () => {
   const currentUserId = useChatAppSelector((store) => store.auth._id);
   const { selectedMessageIds, clearAllSelectedMessage } = useMessageContext();
   const { conversationRoomId: conversationId } = useChatAppContext();
-  const { socket } = useSocketContext();
+  // const { socket } = useSocketContext();
   const api = useRefresh();
 
   const dispatch = useChatAppDispatch();
@@ -120,7 +121,7 @@ const useMessage = () => {
           // console.log("response solo message", response.data);
           if (response.data) {
             dispatch(addMessage(response.data.message));
-            socket.emit("sendMessage", response.data.message);
+            // socket.emit("sendMessage", response.data.message);
           }
           return;
         }
@@ -144,7 +145,7 @@ const useMessage = () => {
         console.log("response ", response.data);
         if (response.data) {
           dispatch(addMessage(response.data.message));
-          socket.emit("send-message", response.data.message);
+          // socket.emit("send-message", response.data.message);
         }
       } catch (error) {
         axiosError(error);
@@ -176,7 +177,7 @@ const useMessage = () => {
   useEffect(() => {
     if (deleteData && selectedMessageIds.length > 0) {
       dispatch(removeMessages(selectedMessageIds));
-      socket.emit("remove-message", selectedMessageIds);
+      // socket.emit("remove-message", selectedMessageIds);
 
       // clearAllSelectedMessage();
     }
