@@ -1,9 +1,11 @@
+import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { IconButton, Stack, TextField, Tooltip, styled } from "@mui/material";
+import React, { useState } from "react";
 
 import { DOC_PREVIEW } from "types";
 import { EmojiEmotions } from "@mui/icons-material";
+import { FormikErrors } from "formik";
 import MediaPreview from "./MediaPreview";
-import React from "react";
 
 type MessageInputProps = {
   value: string;
@@ -14,6 +16,17 @@ type MessageInputProps = {
   resetImagePreview: () => void;
   resetDocPreview: () => void;
   docPreview: DOC_PREVIEW | null;
+
+  showEmoji: boolean;
+  toggleEmoji: () => void;
+  setValues: (
+    values: React.SetStateAction<{
+      msg: string;
+    }>,
+    shouldValidate?: boolean
+  ) => Promise<void | FormikErrors<{
+    msg: string;
+  }>>;
 };
 
 const MessageInput = React.memo(
@@ -24,7 +37,17 @@ const MessageInput = React.memo(
     imagePreview,
     resetDocPreview,
     resetImagePreview,
+    setValues,
+    showEmoji,
+    toggleEmoji,
   }: MessageInputProps) => {
+    const handleEmojiClick = ({ emoji }: EmojiClickData) => {
+      setValues((prev) => {
+        prev.msg = prev.msg + emoji;
+        // setShowEmoji(false);
+        return prev;
+      });
+    };
     return (
       <Stack
         flexDirection="column"
@@ -44,11 +67,19 @@ const MessageInput = React.memo(
           resetImagePreview={resetImagePreview}
         />
 
-        <Stack sx={{ flexDirection: "row", flex: 1, paddingLeft: 1 }}>
+        <Stack
+          sx={{
+            flexDirection: "row",
+            flex: 1,
+            paddingLeft: 1,
+            position: "relative",
+          }}
+        >
           {/* msg input */}
           <StyledInput
-            placeholder="Type Message..."
+            placeholder="Message..."
             multiline
+            autoFocus={true}
             name="msg"
             value={value}
             // rows={1}
@@ -71,6 +102,7 @@ const MessageInput = React.memo(
               // height: "40px",
               "& .MuiOutlinedInput-root": {
                 borderRadius: "0px",
+                padding: "8px 7px 0px",
                 border: "none",
                 "& fieldset": {
                   border: "none",
@@ -84,13 +116,31 @@ const MessageInput = React.memo(
             }}
             // className="hide-scrollbar"
           />
-          <IconButton sx={{ alignSelf: "end", pb: "13px" }}>
+          <IconButton
+            sx={{ alignSelf: "end", pb: "13px" }}
+            onClick={toggleEmoji}
+          >
             <Tooltip title="emoji">
               <EmojiEmotions
                 sx={{ color: "#FFB02E", background: "transparent" }}
               />
             </Tooltip>
           </IconButton>
+          <EmojiPicker
+            open={showEmoji}
+            style={{
+              position: "absolute",
+              bottom: "60px",
+              right: "0px",
+              zIndex: 20,
+              fontSize: "0.7rem",
+            }}
+            width="100%"
+            height="400px"
+            lazyLoadEmojis
+            onEmojiClick={handleEmojiClick}
+            // emojiStyle=""
+          />
         </Stack>
       </Stack>
     );

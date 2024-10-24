@@ -23,7 +23,7 @@ const LeftSideTopBar = React.memo(() => {
   const navigate = useNavigate();
   const menuItems = useMemo(() => {
     return [
-      { text: "Profile", click: () => navigate("/profile") },
+      { text: "Profile Settings", click: () => navigate("/profile") },
       { text: "Logout", click: () => handleLogoutUser() },
     ];
   }, []);

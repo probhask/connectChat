@@ -60,7 +60,6 @@ export const uploadFile = async (req: Request, res: Response) => {
         .json({ message: "sender and conversationId are required " });
       return;
     }
-    console.log("req.file", req.file);
 
     // Save file details to the Upload collection
     const newUpload = new Upload({

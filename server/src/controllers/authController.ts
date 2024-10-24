@@ -68,8 +68,8 @@ export const login = async (req: Request, res: Response) => {
     // send refresh token in cookies
     res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
       httpOnly: true,
+      sameSite: "lax",
       maxAge: fiveDaysInMs,
-      sameSite: "none",
       path: "/",
     });
     res
@@ -181,7 +181,7 @@ export const createNewUser = async (req: Request, res: Response) => {
     // send refresh token in cookies
     res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "lax",
       maxAge: fiveDaysInMs,
       path: "/",
     });
@@ -209,8 +209,10 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(401); // unauthorized
       return;
     }
+    // console.log("refresh token", refreshToken);
 
-    const foundUser = await User.findOne({ refreshToken });
+    const foundUser = await User.findOne({ refreshToken: refreshToken });
+
     if (!foundUser) {
       console.log("user not found");
       res.sendStatus(403); //forbidden

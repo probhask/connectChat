@@ -23,7 +23,7 @@ const UserInfo = React.memo(({ additionalText, name, url }: UserInfoProps) => {
         bgcolor: "inherit",
         zIndex: 2,
         top: 0,
-        // borderBottom: "3px solid var(--color-light-gray)",
+        borderBottom: "3px solid var(--color-light-gray)",
         // boxShadow: "2px 0px 2px rgba(0,0,0,0.2)",
       }}
     >

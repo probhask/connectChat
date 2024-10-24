@@ -55,6 +55,7 @@ const Login = () => {
                   label="Email"
                   variant="outlined"
                   placeholder="Email Address"
+                  autoComplete="email"
                   value={values.email}
                   name="email"
                   onChange={handleChange}
@@ -80,9 +81,10 @@ const Login = () => {
                 <StyledTextField
                   id="password"
                   label="Password"
+                  autoComplete="password"
                   type="password"
                   variant="outlined"
-                  placeholder="Email Address"
+                  placeholder="Enter Password"
                   value={values.password}
                   name="password"
                   onChange={handleChange}
@@ -108,9 +110,16 @@ const Login = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting || loginLoading}
-                sx={{ color: "#fff", backgroundColor: "#000" }}
+                sx={{
+                  color: "#fff",
+                  backgroundColor: "#000",
+                  ":disabled": {
+                    backgroundColor: "#181c14",
+                    color: "#fff",
+                  },
+                }}
               >
-                {isSubmitting || loginLoading ? "..." : "Login"}
+                {isSubmitting || loginLoading ? "logging in ..." : "Login"}
               </Button>
             </Stack>
             <Box sx={{ mt: 1 }}>

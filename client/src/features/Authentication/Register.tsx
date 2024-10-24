@@ -59,6 +59,7 @@ const Register = () => {
                   label="User Name"
                   variant="outlined"
                   placeholder="User Name"
+                  autoComplete="username"
                   value={values.username}
                   name="username"
                   onChange={handleChange}
@@ -85,6 +86,7 @@ const Register = () => {
                   label="Email"
                   variant="outlined"
                   placeholder="Email Address"
+                  autoComplete="email"
                   value={values.email}
                   name="email"
                   onChange={handleChange}
@@ -109,9 +111,10 @@ const Register = () => {
                 <StyledTextField
                   id="password"
                   label="Password"
+                  autoComplete="password"
                   type="password"
                   variant="outlined"
-                  placeholder="Email Address"
+                  placeholder="Enter Password"
                   value={values.password}
                   name="password"
                   onChange={handleChange}
@@ -136,7 +139,14 @@ const Register = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting || registerLoading}
-                sx={{ color: "#fff", backgroundColor: "#000" }}
+                sx={{
+                  color: "#fff",
+                  backgroundColor: "#000",
+                  ":disabled": {
+                    backgroundColor: "#181c14",
+                    color: "#fff",
+                  },
+                }}
               >
                 {isSubmitting || registerLoading ? "creating..." : "Register"}
               </Button>

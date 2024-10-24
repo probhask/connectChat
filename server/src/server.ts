@@ -6,14 +6,11 @@ import connectDB from "./config/db";
 import conversationRoute from "./routes/conversationRoute";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { corsOptions } from "./config/corsOptions";
-import { createServer } from "http";
 import cron from "node-cron";
 import dotenv from "dotenv";
 import { downLoadFile } from "./utils/downloadFile";
 import friendRequestRoute from "./routes/friendRequestRoute";
-import https from "https";
-import { initSocket } from "./services/socket";
+import http from "http";
 import messageRoute from "./routes/messageRoute";
 import path from "path";
 import { runServerOnCrash } from "./utils/runServerOnCrash";
@@ -34,7 +31,7 @@ connectDB();
 //middleware
 app.use(
   cors({
-    origin: `${process.env.FRONTEND_URL}`,
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     optionsSuccessStatus: 200,
@@ -43,14 +40,12 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-console.log("FRONTEND_URL", process.env);
-
-// ping server befoare 15min
+// ping server before 15min
 cron.schedule("*/14 * * * * ", () => {
   console.log("restarting server");
 
-  https
-    .get(`${process.env.BACKEND_URL}`, (res) => {
+  http
+    .get(process.env.BACKEND_URL as string, (res) => {
       if (res.statusCode === 200) {
         console.log("server restarted");
       } else {

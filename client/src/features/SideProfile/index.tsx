@@ -3,6 +3,7 @@ import React, { useEffect, useMemo } from "react";
 import { Stack, styled } from "@mui/material";
 
 import ActionButtons from "./ActionButtons";
+import EmptyMessage from "@components/EmptyMessage";
 import RelatedUsers from "./RelatedUsers";
 import TopNavigateBtn from "./TopNavigateBtn";
 import { USER } from "types";
@@ -65,6 +66,15 @@ const SideProfile = React.memo(() => {
     }
     return false;
   }, [data]);
+  const isGroup = useMemo(() => {
+    if (data) {
+      if (data.type === "GROUP_PROFILE") {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }, [data]);
 
   const {
     handleFetchProfileData,
@@ -96,11 +106,19 @@ const SideProfile = React.memo(() => {
           />
           {/* <MediaList /> */}
           {/* <div style={{ flex: 1 }} /> */}
-          {profileData?.users && <RelatedUsers users={profileData.users} />}
+          {profileData?.users && (
+            <RelatedUsers users={profileData.users} isGroup={isGroup} />
+          )}
           {data?.type && (
             <ActionButtons type={data?.type} btnStatus={btnStatus} />
           )}
         </>
+      )}
+      {!profileLoading && sideProfileData?.length === 0 && (
+        <EmptyMessage
+          primaryText="Select a profile"
+          // secondaryText="To view profile details"
+        />
       )}
       {profileLoading && sideProfileData?.length === 0 && <LoadingState />}
       {!profileLoading && profileError && userProfileId && (

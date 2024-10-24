@@ -3,6 +3,7 @@ import "./index.css";
 import { ChatAppContextProvider } from "./context";
 import { CssBaseline } from "@mui/material";
 import ErrorBoundary from "@components/ErrorBoundary";
+import LoadingFallback from "@components/Layout/LoadingFallback";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
@@ -12,7 +13,7 @@ import routes from "@routes/index";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  <Suspense fallback={"loading chat app"}>
+  <Suspense fallback={<LoadingFallback />}>
     <ErrorBoundary>
       <Provider store={chatAppStore}>
         <ChatAppContextProvider>

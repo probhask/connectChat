@@ -38,7 +38,7 @@ const ConversationTopBar = React.memo(() => {
     if (userId) {
       hideConversationTab();
       showProfileTab();
-      updateUserProfileId(userId);
+      updateUserProfileId(userId, conversation?.isGroupChat);
     }
   };
 
