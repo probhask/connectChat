@@ -245,6 +245,8 @@ export const refreshToken = async (req: Request, res: Response) => {
         ) {
           res.sendStatus(403); //forbidden
           console.log("user id not match with decode user id");
+          console.log("user id", foundUser._id);
+          console.log("decode id", decode.id);
           return;
         }
 
