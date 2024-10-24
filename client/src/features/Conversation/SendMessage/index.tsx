@@ -22,7 +22,6 @@ const SendMessage = React.memo(() => {
     <Formik
       initialValues={{ msg: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log(values);
         sendMessage(values.msg)
           .then(() => {
             resetForm();

@@ -18,8 +18,6 @@ const friendSlice = createSlice({
     },
     addFriend: (state, action: PayloadAction<FRIEND>) => {
       const updatedData = [...state, action.payload];
-      console.log("addFriend called", action.payload, updatedData);
-
       return updatedData;
     },
   },

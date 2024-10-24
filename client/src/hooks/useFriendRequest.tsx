@@ -105,7 +105,6 @@ const useFriendRequest = () => {
   const handleAcceptRequest = useCallback(
     async (requestId: string) => {
       if (!requestId) {
-        console.log("request id not found");
         return;
       }
       setAcceptRequestId(requestId);
@@ -145,7 +144,6 @@ const useFriendRequest = () => {
   const handleCancelRequest = useCallback(
     async (requestId: string, cancelType: CANCEL_TYPE) => {
       if (!requestId || !cancelType) {
-        console.log("request id or cancel type not found");
         return;
       } else {
         setCancelType(cancelType);
@@ -162,7 +160,6 @@ const useFriendRequest = () => {
 
   useEffect(() => {
     if (cancelFriendReqData && cancelRequestId && cancelType) {
-      console.log("cancel request", cancelFriendReqData, cancelRequestId);
       if (cancelType === "SEND") {
         dispatch(removeSentRequest(cancelRequestId)); //remove sent request from redux
       } else if (cancelType === "RECEIVE") {

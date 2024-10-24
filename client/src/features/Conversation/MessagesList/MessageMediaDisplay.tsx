@@ -73,7 +73,7 @@ const MessageMediaDisplay = React.memo(
               effect="opacity"
               // height={"200px"}
               // width={"300px"}
-              src={`${import.meta.env.BACKEND_URL}/api/file/${media?.fileName}`}
+              src={`${import.meta.env.VITE_BACKEND_URL}/api/file/${media?.fileName}`}
               style={{ objectFit: "contain", maxHeight: "300px" }}
             />
             <IconButton

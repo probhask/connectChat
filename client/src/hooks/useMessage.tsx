@@ -13,7 +13,6 @@ import useRefresh from "./useRefresh";
 // import useSocketContext from "@context/SocketContext";
 
 const updateDocPreview = (uploadedFileName: string): DOC_PREVIEW => {
-  console.log("file Name: " + uploadedFileName);
   if (uploadedFileName) {
     const ext = uploadedFileName.split(".").pop()?.toLowerCase();
     if (ext) {
@@ -64,12 +63,10 @@ const useMessage = () => {
         const uploadedFileName = uploadedFile.name;
 
         const fileType = uploadedFile.type;
-        console.log("file type: " + fileType);
 
         //if image
         if (fileType.startsWith("image/")) {
           const reader = new window.FileReader();
-          console.log("reader", reader);
           setDocPreview(null);
 
           reader.onloadend = () => {
@@ -83,8 +80,6 @@ const useMessage = () => {
           const createdPreview = updateDocPreview(uploadedFileName);
 
           if (createdPreview.name) {
-            console.log(createdPreview);
-
             setImagePreview(null);
             setDocPreview(createdPreview);
           } else {
@@ -118,7 +113,6 @@ const useMessage = () => {
             },
             { signal: controller.signal }
           );
-          // console.log("response solo message", response.data);
           if (response.data) {
             dispatch(addMessage(response.data.message));
             // socket.emit("sendMessage", response.data.message);
@@ -135,14 +129,12 @@ const useMessage = () => {
         formData.append("sender", sender); // Add the sender field
         formData.append("conversationId", conversationId); // Add the conversation ID
         formData.append("text", text);
-        console.log("file", formData);
 
         const response = await api.post("/upload/message", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("response ", response.data);
         if (response.data) {
           dispatch(addMessage(response.data.message));
           // socket.emit("send-message", response.data.message);

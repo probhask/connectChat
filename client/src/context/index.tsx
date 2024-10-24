@@ -42,13 +42,11 @@ export const ChatAppContextProvider = ({
   );
 
   const showConversationTab = useCallback(() => {
-    console.log("show ConversationTab");
     setConversationTab(true);
     storeToSessionStorage("conversation-tab", true);
     hideProfileTab();
   }, []);
   const hideConversationTab = useCallback(() => {
-    console.log("hide ConversationTab");
     setConversationTab(false);
     storeToSessionStorage("conversation-tab", false);
   }, []);
@@ -58,13 +56,11 @@ export const ChatAppContextProvider = ({
   }, []);
 
   const showProfileTab = useCallback(() => {
-    console.log("show ProfileTab");
     setProfileTab(true);
     storeToSessionStorage("profile-tab", true);
     hideConversationTab();
   }, []);
   const hideProfileTab = useCallback(() => {
-    console.log("hide ProfileTab");
     setProfileTab(false);
     storeToSessionStorage("profile-tab", false);
   }, []);

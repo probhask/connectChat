@@ -38,7 +38,6 @@ const authSlice = createSlice({
     removeProfilePicture: (state) => {
       const updatedData = { ...state, profile_picture: null };
       storeAuthDataToLocalStorage(updatedData);
-      console.log("image removed", updatedData);
 
       return updatedData;
     },

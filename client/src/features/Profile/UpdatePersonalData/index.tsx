@@ -49,7 +49,6 @@ const UpdatePersonalData = () => {
         validateOnChange={true}
         enableReinitialize={true}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("update personal data form value", values);
           if (
             values.username !== user.username ||
             values.email !== user.email
@@ -69,7 +68,6 @@ const UpdatePersonalData = () => {
                 setSubmitting(false);
               });
           } else {
-            console.log("same username and email");
             setSubmitting(false);
           }
         }}

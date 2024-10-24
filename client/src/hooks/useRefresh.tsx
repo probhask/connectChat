@@ -10,7 +10,6 @@ import { useEffect } from "react";
 //   const dispatch = useChatAppDispatch();
 
 const refreshToken = async (controller: AbortController) => {
-  // console.log("refresh function is running...");
   try {
     const response = await api.get("/auth/refresh", {
       signal: controller.signal,
@@ -62,7 +61,6 @@ const useRefresh = () => {
         const prevRequest = error?.config;
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           if (prevRequest.url === "/auth/refresh") {
-            console.log("trigged this .auth/refresh");
             // toast.error("Session Expired Login Again");
             navigate("/auth/login", {
               replace: true,
@@ -72,17 +70,13 @@ const useRefresh = () => {
           }
           prevRequest.sent = true;
           const newAccessToken = await refreshToken(controller);
-          // console.log("new access token ", newAccessToken);
           if (newAccessToken) {
             prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-            // console.log("new Access token ", newAccessToken);
             dispatch(updateAccessToken(newAccessToken));
           }
           return api(prevRequest);
         }
         if (error.code !== "ERR_CANCELED" && error.status === 401) {
-          console.log("trigged this err cancel");
-
           navigate("/auth/login", { replace: true, state: location.pathname });
         }
         return Promise.reject(error);

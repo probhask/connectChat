@@ -33,7 +33,6 @@ const Login = () => {
         initialValues={{ email: "", password: "" }}
         validationSchema={LoginFormValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("login form value", values);
           handleLogin(values.email, values.password).finally(() => {
             setSubmitting(false);
           });

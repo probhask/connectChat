@@ -47,7 +47,6 @@ const useFetchData = <T,>(
           ...customOptions,
           signal: controller.signal,
         });
-        console.log("useFetchData response", response.data);
         if (response.status >= 200 && response.status < 300) {
           setData(response.data);
           setStatus(response.data.status);

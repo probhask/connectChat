@@ -84,7 +84,6 @@ const useExplore = () => {
 
   useEffect(() => {
     if (sendRequestData && sendRequestData._id && currentReceiverId) {
-      console.log("friend request sent successfully ...", sendRequestData);
       dispatch(addSentRequest(sendRequestData));
       dispatch(removeUser(currentReceiverId));
       setCurrentReceiverId(null);

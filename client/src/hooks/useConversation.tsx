@@ -15,7 +15,6 @@ const useConversation = () => {
         if (!conversationRoomId || !userId) {
           console.error("conversationRoomId and userId are required");
         }
-        // console.log("conversationRoomId and userId", conversationRoomId, userId);
 
         const conversationApi = api.get("/conversation", {
           params: {
@@ -33,7 +32,6 @@ const useConversation = () => {
           conversationApi,
           messageApi,
         ]);
-        console.log(conversation.data, messages.data);
         dispatch(
           addInitialConversationRoomData({
             conversation: conversation.data,

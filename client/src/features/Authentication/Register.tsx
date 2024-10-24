@@ -33,7 +33,6 @@ const Register = () => {
         validationSchema={RegisterFormValidationSchema}
         validateOnChange={true}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("register form value", values);
           handleRegister(
             values.username,
             values.email,

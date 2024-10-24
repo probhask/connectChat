@@ -99,7 +99,6 @@ const useAuthentication = () => {
 
     try {
       const response = await Axios.post("/auth/logout", { userId: user._id });
-      console.log("resp ", response);
       if (response.status === 204) {
         dispatch(logoutUser());
         toast.success("Already logged out");

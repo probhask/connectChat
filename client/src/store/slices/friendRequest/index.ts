@@ -45,11 +45,6 @@ const friendRequestSlice = createSlice({
       const receivedRequest = state.received.filter(
         (req) => req._id !== action.payload
       );
-      console.log(
-        "removeReceivedRequest called",
-        action.payload,
-        receivedRequest
-      );
       return { ...state, received: [...receivedRequest] };
     },
     removeSentRequest: (state, action: PayloadAction<string>) => {

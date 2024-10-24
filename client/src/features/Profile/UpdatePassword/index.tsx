@@ -29,7 +29,6 @@ const UpdatePassword = () => {
         validationSchema={ChangePasswordFormValidation}
         validateOnChange={true}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("register form value", values);
           if (values.password && values.newPassword) {
             handleUpdatePassword(values.password, values.newPassword)
               .then(() => {
@@ -46,7 +45,6 @@ const UpdatePassword = () => {
                 setSubmitting(false);
               });
           } else {
-            console.log("password not found");
             setSubmitting(false);
           }
         }}

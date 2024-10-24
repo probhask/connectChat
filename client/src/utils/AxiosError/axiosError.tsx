@@ -2,7 +2,6 @@ import { AxiosError } from "axios";
 
 export const getErrorMessage = (error: unknown | AxiosError | Error) => {
   let errorMessage: string = "";
-  console.log(error);
 
   if (error instanceof AxiosError) {
     errorMessage = error.response?.data
@@ -13,7 +12,6 @@ export const getErrorMessage = (error: unknown | AxiosError | Error) => {
   } else {
     errorMessage = "An unknown error occurred";
   }
-  console.log("axios Error", errorMessage);
   return errorMessage;
 };
 
@@ -38,8 +36,6 @@ export const getErrorStatus = (
   } else {
     status = undefined;
   }
-  console.log("axios status", status);
-
   return status;
 };
 

@@ -16,7 +16,7 @@
 // }: {
 //   children: React.ReactNode;
 // }) => {
-//   const socket = useMemo(() => io("import.meta.env.BACKEND_URL:5000"), []);
+//   const socket = useMemo(() => io("import.meta.env.VITE_BACKEND_URL:5000"), []);
 //   const user = useChatAppSelector((store) => store.auth);
 
 //   useEffect(() => {

@@ -22,7 +22,7 @@ const ProfileAvatar = React.memo(
       <StyledUserAvatar
         live={isOnline.toString()}
         alt={alt}
-        src={`${import.meta.env.BACKEND_URL}/api/file/${url}`}
+        src={`${import.meta.env.VITE_BACKEND_URL}/api/file/${url}`}
         sx={sx}
         onClick={handleClick}
       />

@@ -59,10 +59,8 @@ export const ProfileContextProvider = ({
   const handleUploadProfilePic = useCallback(
     (file: File) => {
       if (!file) {
-        console.log("file is requires");
         return;
       }
-      console.log(file);
 
       const formData = new FormData();
       formData.append("file", file);
