@@ -212,17 +212,6 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(401); // unauthorized
       return;
     }
-    console.log("refresh token", refreshToken);
-    const testUser = await User.findOne({ _id: "66fd40a2a6c7ebef71eb2616" });
-    console.log("test user", testUser);
-    console.log(
-      "is verify refresh token normal env",
-      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string)
-    );
-    console.log(
-      "is verify refresh token string env",
-      jwt.verify(refreshToken, `${process.env.REFRESH_TOKEN_SECRET}`)
-    );
 
     const foundUser = await User.findOne({ refreshToken: refreshToken });
 
@@ -231,6 +220,9 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(403); //forbidden
       return;
     }
+    console.log("found  user:", foundUser._id, foundUser.refreshToken),
+      foundUser.username,
+      refreshToken;
 
     jwt.verify(
       refreshToken,
@@ -243,10 +235,10 @@ export const refreshToken = async (req: Request, res: Response) => {
             new mongoose.Types.ObjectId(decode.id as string)
           )
         ) {
-          res.sendStatus(403); //forbidden
           console.log("user id not match with decode user id");
           console.log("user id", foundUser._id);
           console.log("decode id", decode.id);
+          res.sendStatus(403); //forbidden
           return;
         }
 
