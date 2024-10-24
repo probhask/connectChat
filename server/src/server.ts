@@ -33,7 +33,7 @@ connectDB();
 
 //middleware
 app.use(express.json());
-app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(cookieParser());
 
 console.log("FRONTEND_URL", process.env.FRONTEND_URL);
