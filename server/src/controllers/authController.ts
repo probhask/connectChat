@@ -11,8 +11,11 @@ import { Request, Response } from "express";
 
 import User from "../models/user";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+
+dotenv.config();
 
 ////////////////////////////////////////////////////////////////////////
 // Login Controller

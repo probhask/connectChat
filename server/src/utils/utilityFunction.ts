@@ -1,6 +1,9 @@
 import { Response } from "express";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+
+dotenv.config();
 
 // generate access Token
 export const generateAccessToken = (userId: string) => {
@@ -8,7 +11,7 @@ export const generateAccessToken = (userId: string) => {
     { id: userId },
     `${process.env.ACCESS_TOKEN_SECRET}` as string,
     {
-      expiresIn: `${process.env.ACCESS_TOKEN_EXPIRATION}`,
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
     }
   );
 };
@@ -18,7 +21,7 @@ export const generateRefreshToken = (userId: string) => {
     { id: userId },
     `${process.env.Refresh_TOKEN_SECRET}` as string,
     {
-      expiresIn: `${process.env.REFRESH_TOKEN_EXPIRATION}`,
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRATION,
     }
   );
 };
