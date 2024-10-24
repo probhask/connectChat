@@ -31,7 +31,7 @@ connectDB();
 //middleware
 app.use(
   cors({
-    origin: `${process.env.FRONTEND_UR}`,
+    origin: `${process.env.FRONTEND_URL}`,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     optionsSuccessStatus: 200,
