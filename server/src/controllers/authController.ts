@@ -69,10 +69,9 @@ export const login = async (req: Request, res: Response) => {
     res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
       httpOnly: true,
       maxAge: fiveDaysInMs,
+      sameSite: "none",
+      path: "/",
     });
-
-    console.log("cookie send", refreshToken);
-
     res
       .status(200)
       .json({ ...userWithoutPassword, accessToken, success: true });
@@ -180,7 +179,12 @@ export const createNewUser = async (req: Request, res: Response) => {
     await user.save();
 
     // send refresh token in cookies
-    res.cookie(REFRESH_TOKEN_NAME, refreshToken, { httpOnly: true });
+    res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: fiveDaysInMs,
+      path: "/",
+    });
     // Respond with the created user excluding the password
     res.status(201).json({
       _id: user._id,
@@ -215,7 +219,7 @@ export const refreshToken = async (req: Request, res: Response) => {
 
     jwt.verify(
       refreshToken,
-      `${process.env.REFRESH_TOKEN_SECRET}`,
+      process.env.REFRESH_TOKEN_SECRET as string,
       (err: any, decode: any) => {
         // match if error or user._id is not equal to decode.id of cookie
         if (
