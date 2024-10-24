@@ -6,7 +6,7 @@ export const verifySocketJWT = async (
   try {
     const decoded: any = jwt.verify(
       token,
-      process.env.ACCESS_TOKEN_SECRET as string
+      `${process.env.ACCESS_TOKEN_SECRET}` as string
     );
     // console.log("token", token);
     // console.log("decode", decoded);
