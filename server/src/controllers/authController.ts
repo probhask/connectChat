@@ -212,7 +212,17 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(401); // unauthorized
       return;
     }
-    // console.log("refresh token", refreshToken);
+    console.log("refresh token", refreshToken);
+    const testUser = await User.findOne({ _id: "66fd40a2a6c7ebef71eb2616" });
+    console.log("test user", testUser);
+    console.log(
+      "is verify refresh token normal env",
+      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string)
+    );
+    console.log(
+      "is verify refresh token string env",
+      jwt.verify(refreshToken, `${process.env.REFRESH_TOKEN_SECRET}`)
+    );
 
     const foundUser = await User.findOne({ refreshToken: refreshToken });
 
