@@ -70,6 +70,9 @@ export const login = async (req: Request, res: Response) => {
       httpOnly: true,
       maxAge: fiveDaysInMs,
     });
+
+    console.log("cookie send", refreshToken);
+
     res
       .status(200)
       .json({ ...userWithoutPassword, accessToken, success: true });
