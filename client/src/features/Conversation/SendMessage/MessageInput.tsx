@@ -1,11 +1,11 @@
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { IconButton, Stack, TextField, Tooltip, styled } from "@mui/material";
-import React, { useState } from "react";
 
 import { DOC_PREVIEW } from "types";
 import { EmojiEmotions } from "@mui/icons-material";
 import { FormikErrors } from "formik";
 import MediaPreview from "./MediaPreview";
+import React from "react";
 
 type MessageInputProps = {
   value: string;
