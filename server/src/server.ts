@@ -39,24 +39,24 @@ app.use(cookieParser());
 console.log("FRONTEND_URL", process.env.FRONTEND_URL);
 
 // ping server before 15min
-cron.schedule("*/14 * * * * ", () => {
-  console.log("restarting server");
+// cron.schedule("*/14 * * * * ", () => {
+//   console.log("restarting server");
 
-  https
-    .get(process.env.BACKEND_URL as string, (res) => {
-      if (res.statusCode === 200) {
-        console.log("server restarted");
-      } else {
-        console.error(
-          "failed to restart server with status code",
-          res.statusCode
-        );
-      }
-    })
-    .on("error", (err) => {
-      console.error("error during restart: ", err.message);
-    });
-});
+//   https
+//     .get(process.env.BACKEND_URL as string, (res) => {
+//       if (res.statusCode === 200) {
+//         console.log("server restarted");
+//       } else {
+//         console.error(
+//           "failed to restart server with status code",
+//           res.statusCode
+//         );
+//       }
+//     })
+//     .on("error", (err) => {
+//       console.error("error during restart: ", err.message);
+//     });
+// });
 
 // define  routes
 app.get("/", (req: Request, res: Response) => {
