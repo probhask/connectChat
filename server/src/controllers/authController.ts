@@ -71,9 +71,9 @@ export const login = async (req: Request, res: Response) => {
     // send refresh token in cookies
     res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
       httpOnly: true,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: fiveDaysInMs,
-      path: "/",
     });
     res
       .status(200)
@@ -184,9 +184,9 @@ export const createNewUser = async (req: Request, res: Response) => {
     // send refresh token in cookies
     res.cookie(REFRESH_TOKEN_NAME, refreshToken, {
       httpOnly: true,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: fiveDaysInMs,
-      path: "/",
     });
     // Respond with the created user excluding the password
     res.status(201).json({
