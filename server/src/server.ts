@@ -43,9 +43,9 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-console.log("FRONTEND_URL", process.env.FRONTEND_URL);
+console.log("FRONTEND_URL", process.env);
 
-// ping server before 15min
+// ping server befoare 15min
 cron.schedule("*/14 * * * * ", () => {
   console.log("restarting server");
 
