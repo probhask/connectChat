@@ -27,7 +27,7 @@ const verifyJWT = (
 
   jwt.verify(
     token,
-    process.env.ACCESS_TOKEN_SECRET as string,
+    `${process.env.ACCESS_TOKEN_SECRET}` as string,
     (err: any, decoded: any) => {
       if (err) {
         console.error(" verify jwt:Invalid Access Token");
