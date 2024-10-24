@@ -212,7 +212,7 @@ export const refreshToken = async (req: Request, res: Response) => {
 
     jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET as string,
+      `${process.env.REFRESH_TOKEN_SECRET}`,
       (err: any, decode: any) => {
         // match if error or user._id is not equal to decode.id of cookie
         if (

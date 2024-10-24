@@ -4,14 +4,18 @@ import mongoose from "mongoose";
 
 // generate access Token
 export const generateAccessToken = (userId: string) => {
-  return jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET as string, {
-    expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
-  });
+  return jwt.sign(
+    { id: userId },
+    `${process.env.ACCESS_TOKEN_SECRET}` as string,
+    {
+      expiresIn: `${process.env.ACCESS_TOKEN_EXPIRATION}`,
+    }
+  );
 };
 // generate refresh Token
 export const generateRefreshToken = (userId: string) => {
-  return jwt.sign({ id: userId }, process.env.Refresh_TOKEN_SECRET as string, {
-    expiresIn: process.env.REFRESH_TOKEN_EXPIRATION,
+  return jwt.sign({ id: userId }, `${process.env.Refresh_TOKEN_SECRET}`, {
+    expiresIn: `${process.env.REFRESH_TOKEN_EXPIRATION}`,
   });
 };
 

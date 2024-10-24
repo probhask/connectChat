@@ -34,7 +34,7 @@ connectDB();
 //middleware
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: `${process.env.FRONTEND_URL}`,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     optionsSuccessStatus: 200,
@@ -50,7 +50,7 @@ cron.schedule("*/14 * * * * ", () => {
   console.log("restarting server");
 
   https
-    .get(process.env.BACKEND_URL as string, (res) => {
+    .get(`${process.env.BACKEND_URL}`, (res) => {
       if (res.statusCode === 200) {
         console.log("server restarted");
       } else {
