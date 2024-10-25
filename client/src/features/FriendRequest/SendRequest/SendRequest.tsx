@@ -5,31 +5,17 @@ import { Cancel } from "@mui/icons-material";
 import EmptyMessage from "@components/EmptyMessage";
 import { Stack } from "@mui/material";
 import { useChatAppSelector } from "@store/hooks";
-import { useEffect } from "react";
-import useFriendRequest from "@hooks/useFriendRequest";
+import useFriendRequestContext from "@context/FriendRequestContext";
 
 const SendRequest = () => {
   const req = useChatAppSelector((store) => store?.friendRequest?.sended);
   const {
     sentLoading,
     sentError,
-    abortSentRequest,
     handleCancelRequest,
     cancelLoading,
     cancelRequestId,
-    abortCancelRequest,
-  } = useFriendRequest();
-
-  useEffect(() => {
-    return () => {
-      if (abortSentRequest) {
-        abortSentRequest();
-      }
-      if (abortCancelRequest) {
-        abortCancelRequest();
-      }
-    };
-  }, [abortSentRequest, abortCancelRequest]);
+  } = useFriendRequestContext();
 
   return (
     <Stack

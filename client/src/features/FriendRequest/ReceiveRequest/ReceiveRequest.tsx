@@ -6,7 +6,7 @@ import EmptyMessage from "@components/EmptyMessage";
 import { Stack } from "@mui/material";
 import { useChatAppSelector } from "@store/hooks";
 import { useEffect } from "react";
-import useFriendRequest from "@hooks/useFriendRequest";
+import useFriendRequestContext from "@context/FriendRequestContext";
 
 const ReceiveRequest = () => {
   const req = useChatAppSelector((store) => store.friendRequest.received);
@@ -22,7 +22,7 @@ const ReceiveRequest = () => {
     abortAcceptRequest,
     acceptLoading,
     acceptRequestId,
-  } = useFriendRequest();
+  } = useFriendRequestContext();
 
   useEffect(() => {
     return () => {

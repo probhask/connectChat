@@ -5,20 +5,24 @@ import ActionProfilePreview from "@components/ActionProfilePreview";
 import EmptyMessage from "@components/EmptyMessage";
 import { Stack } from "@mui/material";
 import { useChatAppSelector } from "@store/hooks";
-import useFriend from "@hooks/useFriend";
+import useFriendContext from "@context/FriendContext";
 
 const FriendsListPage = () => {
   const friendsList = useChatAppSelector((store) => store.friends);
+
   const {
+    //fetch  friends
     friendError,
     friendLoading,
-    handleUnfriendUser,
+    //unfriend
     unfriendLoading,
+    handleUnfriendUser,
     removeFriendId,
+    //enter conversation user
     conversationRoomLoading,
     conversationFriendId,
     handleFindConversationRoom,
-  } = useFriend();
+  } = useFriendContext();
 
   return (
     <Stack

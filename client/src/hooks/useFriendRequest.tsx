@@ -1,4 +1,10 @@
-import { FRIEND, FRIEND_REQUEST, TAB_FRIENDS_REQUEST } from "types";
+import type {
+  CANCEL_TYPE,
+  FRIEND,
+  RECEIVE_FRIEND_REQUEST,
+  SENT_FRIEND_REQUEST,
+  TAB_FRIENDS_REQUEST,
+} from "types";
 import {
   addInitialReceivedFriendRequestData,
   addInitialSentFriendRequestData,
@@ -12,10 +18,6 @@ import { useChatAppDispatch, useChatAppSelector } from "@store/hooks";
 import { addFriend } from "@store/slices/friends";
 import toast from "react-hot-toast";
 import useFetchData from "./useFetchData";
-
-type CANCEL_TYPE = "SEND" | "RECEIVE";
-type SENT_FRIEND_REQUEST = FRIEND_REQUEST[];
-type RECEIVE_FRIEND_REQUEST = FRIEND_REQUEST[];
 
 const useFriendRequest = () => {
   const dispatch = useChatAppDispatch();

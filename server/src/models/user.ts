@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 import { IUpload } from "./upload";
+import bcrypt from "bcrypt";
 
 export interface IUser extends Document {
   username: string;
@@ -56,3 +57,17 @@ const userSchema: Schema = new mongoose.Schema(
 
 const User = mongoose.model<IUser>("User", userSchema);
 export default User;
+
+// async function testFunc() {
+//   const users = await User.find({ password: "Pass@1234" });
+//   for (const user of users) {
+//     const password = user.password;
+
+//     // Hash the password before saving
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     user.password = hashedPassword;
+//     await user.save();
+//   }
+// }
+// testFunc();

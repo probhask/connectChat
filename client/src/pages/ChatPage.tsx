@@ -1,6 +1,8 @@
 import { Box, Stack, styled } from "@mui/material";
 
 import ConversationPage from "./ConversationPage";
+import { FriendContextProvider } from "@context/FriendContext";
+import { FriendRequestContextProvider } from "@context/FriendRequestContext";
 import LeftSideTopBar from "@components/LeftSideTopBar";
 import { Outlet } from "react-router-dom";
 import SideProfile from "@features/SideProfile";
@@ -10,36 +12,40 @@ const ChatPage = () => {
   const { conversationTab, profileTab } = useChatAppContext();
 
   return (
-    <Stack direction="row" sx={{ spacing: { xs: 0, sm: 2 } }}>
-      <LeftSideBar screen={(conversationTab || profileTab).toString()}>
-        <LeftSideTopBar />
-        <Box
-          sx={{
-            height: "calc(100vh - 90px)",
-            overflow: "auto",
-            backgroundColor: "white",
-          }}
-        >
-          <Outlet />
-        </Box>
-      </LeftSideBar>
+    <FriendContextProvider>
+      <FriendRequestContextProvider>
+        <Stack direction="row" sx={{ spacing: { xs: 0, sm: 2 } }}>
+          <LeftSideBar screen={(conversationTab || profileTab).toString()}>
+            <LeftSideTopBar />
+            <Box
+              sx={{
+                height: "calc(100vh - 90px)",
+                overflow: "auto",
+                backgroundColor: "white",
+              }}
+            >
+              <Outlet />
+            </Box>
+          </LeftSideBar>
 
-      {/* chat room */}
-      <ChatRoom
-        screen={conversationTab.toString()}
-        other={profileTab.toString()}
-      >
-        <ConversationPage />
-      </ChatRoom>
+          {/* chat room */}
+          <ChatRoom
+            screen={conversationTab.toString()}
+            other={profileTab.toString()}
+          >
+            <ConversationPage />
+          </ChatRoom>
 
-      {/* profile info */}
-      <RightSideBar
-        screen={profileTab.toString()}
-        other={conversationTab.toString()}
-      >
-        <SideProfile />
-      </RightSideBar>
-    </Stack>
+          {/* profile info */}
+          <RightSideBar
+            screen={profileTab.toString()}
+            other={conversationTab.toString()}
+          >
+            <SideProfile />
+          </RightSideBar>
+        </Stack>
+      </FriendRequestContextProvider>
+    </FriendContextProvider>
   );
 };
 

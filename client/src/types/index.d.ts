@@ -123,3 +123,8 @@ type USER_PROFILE = {
   type: "USER_PROFILE";
 };
 export type SideProfileApiResponse = GROUP_PROFILE | USER_PROFILE;
+
+// Friend  request
+export type CANCEL_TYPE = "SEND" | "RECEIVE";
+export type SENT_FRIEND_REQUEST = FRIEND_REQUEST[];
+export type RECEIVE_FRIEND_REQUEST = FRIEND_REQUEST[];

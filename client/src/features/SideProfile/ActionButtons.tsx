@@ -3,15 +3,23 @@ import { Button, Stack } from "@mui/material";
 import React, { useMemo } from "react";
 
 import styled from "@emotion/styled";
+import useFriendContext from "@context/FriendContext";
 
 const ActionButtons = React.memo(
   ({
     btnStatus,
     type,
+    profileId,
   }: {
     type: "GROUP_PROFILE" | "USER_PROFILE";
     btnStatus: boolean;
+    profileId: string;
   }) => {
+    const { unfriendLoading, handleUnfriendUser, removeFriendId } =
+      useFriendContext();
+
+    // const {} = useFriendR;/
+
     const btn = useMemo(() => {
       if (type === "GROUP_PROFILE" && btnStatus) {
         return {
@@ -29,10 +37,13 @@ const ActionButtons = React.memo(
         };
       } else if (type === "USER_PROFILE" && btnStatus) {
         return {
-          text: "Unfriend",
+          text:
+            unfriendLoading && removeFriendId === profileId
+              ? "..."
+              : "Unfriend",
           pallet: "#C62E2E",
           icon: <PersonRemove />,
-          click: () => {},
+          click: () => handleUnfriendUser(profileId),
         };
       } else if (type === "USER_PROFILE" && !btnStatus) {
         return {
@@ -42,7 +53,7 @@ const ActionButtons = React.memo(
           click: () => {},
         };
       }
-    }, [btnStatus, type]);
+    }, [btnStatus, type, unfriendLoading, removeFriendId, profileId]);
 
     return (
       <Stack

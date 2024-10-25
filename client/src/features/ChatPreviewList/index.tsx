@@ -51,7 +51,7 @@ const ChatPreviewList = React.memo(() => {
           })}
       </List>
 
-      {!chatListError && chatList.length === 0 && (
+      {!chatListError && !chatListLoading && chatList.length === 0 && (
         <EmptyMessage
           primaryText="No conversation yet"
           secondaryText="Start chatting with your friends now!"
@@ -59,8 +59,10 @@ const ChatPreviewList = React.memo(() => {
           navigateTo="/friends"
         />
       )}
-      {chatListLoading && <LoadingState />}
-      {!chatListLoading && chatListError && (
+      {chatListLoading && !chatListError && chatList.length === 0 && (
+        <LoadingState />
+      )}
+      {!chatListLoading && !chatListError && chatList.length === 0 && (
         <ErrorState error={"unable to load data"} />
       )}
     </ChatListContainer>

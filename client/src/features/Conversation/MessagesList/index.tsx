@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 import MessageAvatar from "./MessageAvatar";
 import { useChatAppSelector } from "@store/hooks";
-import useMessageContext from "@context/messageContext";
+import useMessageContext from "@context/MessageContext";
 
 const MessageItem = React.lazy(() => import("./MessageItem"));
 

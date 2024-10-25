@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 
+import { AiOutlineLoading } from "react-icons/ai";
 import { Error } from "@mui/icons-material";
 import React from "react";
 
@@ -26,19 +27,33 @@ export const EmptyData = React.memo(
 );
 
 export const LoadingState = React.memo(
-  ({ message = "loading..." }: { message?: string }) => {
+  ({ message = "loading" }: { message?: string }) => {
     return (
-      <Typography
+      <Stack
         sx={{
-          textAlign: "center",
-          paddingBlock: "20px",
-          width: "100%",
-          color: " #404040",
-          fontSize: "0.95rem",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+          columnGap: "10px",
+          color: " var(--color-bg-primary)",
+          height: "70vh",
         }}
       >
-        {message}...
-      </Typography>
+        <AiOutlineLoading className="size-5 animate-spin duration-1000 ease-in text-inherit" />
+        {/* < sx={{ width: "1.3rem", height: "auto", mr: 1 }} /> */}
+
+        <Typography
+          sx={{
+            textAlign: "center",
+            paddingBlock: "20px",
+            // color: " #404040",
+            fontSize: "1rem",
+            color: "inherit",
+          }}
+        >
+          {message}...
+        </Typography>
+      </Stack>
     );
   }
 );

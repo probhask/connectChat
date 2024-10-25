@@ -2,7 +2,6 @@ import { ErrorState, LoadingState } from "@components/FetchingStates";
 import React, { useEffect, useMemo } from "react";
 import { Stack, styled } from "@mui/material";
 
-import ActionButtons from "./ActionButtons";
 import EmptyMessage from "@components/EmptyMessage";
 import RelatedUsers from "./RelatedUsers";
 import TopNavigateBtn from "./TopNavigateBtn";
@@ -34,14 +33,17 @@ const SideProfile = React.memo(() => {
     name: string;
     additionalText: string;
     users: USER[];
+    profileId: string;
   } = useMemo(() => {
     if (data) {
+      // profile is group
       if ("isMember" in data) {
         return {
           url: data.group?.group_picture?.fileName || "",
           name: data.group.groupName,
           additionalText: `${data.group.participants?.length || 0} members`,
           users: data.group.participants ?? [],
+          profileId: data.group._id,
         };
       } else {
         return {
@@ -49,23 +51,30 @@ const SideProfile = React.memo(() => {
           name: data?.user.username,
           additionalText: data?.user.email,
           users: data?.user?.friends ?? [],
+          profileId: data.user._id,
         };
       }
       // Default return if data is not valid
     }
-    return { url: "", name: "Unknown", additionalText: "", users: [] };
+    return {
+      url: "",
+      name: "Unknown",
+      additionalText: "",
+      users: [],
+      profileId: "",
+    };
   }, [data]);
 
-  const btnStatus = useMemo(() => {
-    if (data) {
-      if ("isMember" in data) {
-        return data?.isMember;
-      } else {
-        return data?.isFriend;
-      }
-    }
-    return false;
-  }, [data]);
+  // const btnStatus = useMemo(() => {
+  //   if (data) {
+  //     if ("isMember" in data) {
+  //       return data?.isMember;
+  //     } else {
+  //       return data?.isFriend;
+  //     }
+  //   }
+  //   return false;
+  // }, [data]);
   const isGroup = useMemo(() => {
     if (data) {
       if (data.type === "GROUP_PROFILE") {
@@ -82,6 +91,7 @@ const SideProfile = React.memo(() => {
     profileLoading,
     abortProfileFetch,
   } = useSideProfile();
+
   useEffect(() => {
     if (
       userProfileId &&
@@ -109,9 +119,13 @@ const SideProfile = React.memo(() => {
           {profileData?.users && (
             <RelatedUsers users={profileData.users} isGroup={isGroup} />
           )}
-          {data?.type && (
-            <ActionButtons type={data?.type} btnStatus={btnStatus} />
-          )}
+          {/* {data?.type && (
+            <ActionButtons
+              type={data?.type}
+              btnStatus={btnStatus}
+              profileId={profileData.profileId}
+            />
+          )} */}
         </>
       )}
       {!profileLoading && sideProfileData?.length === 0 && (
