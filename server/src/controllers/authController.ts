@@ -220,15 +220,6 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(403); //forbidden
       return;
     }
-    console.log(
-      "found  user:",
-      foundUser._id,
-      foundUser.refreshToken,
-      foundUser.username,
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
-      `${process.env.REFRESH_TOKEN_SECRET}`
-    );
 
     jwt.verify(
       refreshToken,
@@ -242,30 +233,6 @@ export const refreshToken = async (req: Request, res: Response) => {
           )
         ) {
           console.log("user id not match with decode user id");
-          console.log("user id", foundUser._id);
-          console.log("decode id", decode);
-          console.log(
-            "   `${process.env.REFRESH_TOKEN_SECRET}`",
-            `${process.env.REFRESH_TOKEN_SECRET}`
-          );
-          console.log(
-            "   process.env.REFRESH_TOKEN_SECRET",
-            process.env.REFRESH_TOKEN_SECRET
-          );
-          console.log("error", err);
-          console.log(
-            "is matching",
-            !new mongoose.Types.ObjectId(foundUser._id as string).equals(
-              new mongoose.Types.ObjectId(decode.id as string)
-            )
-          );
-          console.info(
-            "is matching",
-            !new mongoose.Types.ObjectId(foundUser._id as string).equals(
-              new mongoose.Types.ObjectId(decode.id as string)
-            )
-          );
-          console.info("error", err);
           res.sendStatus(403); //forbidden
           return;
         }
