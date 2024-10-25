@@ -2,7 +2,7 @@ import { Box, styled } from "@mui/material";
 
 import ConversationTopBar from "@features/Conversation/ConversationTopBar";
 import EmptyMessage from "@components/EmptyMessage";
-import { MessageContextProvider } from "@context/MessageContext";
+import { MessageContextProvider } from "@context/messageContext";
 import MessagesList from "@features/Conversation/MessagesList";
 import SendMessage from "@features/Conversation/SendMessage";
 import useChatAppContext from "@context/index";

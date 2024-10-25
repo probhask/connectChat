@@ -7,7 +7,7 @@ import axiosError from "@utils/AxiosError/axiosError";
 import toast from "react-hot-toast";
 import useChatAppContext from "@context/index";
 import useFetchData from "./useFetchData";
-import useMessageContext from "@context/MessageContext";
+import useMessageContext from "@context/messageContext";
 import useRefresh from "./useRefresh";
 
 // import useSocketContext from "@context/SocketContext";

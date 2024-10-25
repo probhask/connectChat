@@ -16,7 +16,7 @@ import { convertDate } from "@utils/convertDate";
 import useChatAppContext from "@context/index";
 import { useChatAppSelector } from "@store/hooks";
 import useMessage from "@hooks/useMessage";
-import useMessageContext from "@context/MessageContext";
+import useMessageContext from "@context/messageContext";
 import useMuiMenu from "@hooks/useMuiMenu";
 
 const ConversationTopBar = React.memo(() => {
