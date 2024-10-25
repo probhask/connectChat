@@ -237,7 +237,21 @@ export const refreshToken = async (req: Request, res: Response) => {
         ) {
           console.log("user id not match with decode user id");
           console.log("user id", foundUser._id);
-          console.log("decode id", decode.id);
+          console.log("decode id", decode);
+          console.info(
+            "is matching",
+            !new mongoose.Types.ObjectId(foundUser._id as string).equals(
+              new mongoose.Types.ObjectId(decode.id as string)
+            )
+          );
+          console.info("error", err);
+          console.log(
+            "is matching",
+            !new mongoose.Types.ObjectId(foundUser._id as string).equals(
+              new mongoose.Types.ObjectId(decode.id as string)
+            )
+          );
+          console.log("error", err);
           res.sendStatus(403); //forbidden
           return;
         }
