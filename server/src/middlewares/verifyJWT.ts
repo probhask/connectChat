@@ -34,6 +34,8 @@ const verifyJWT = (
         res.status(403).json({ message: "Invalid Access Token" }); // invalid token
         return;
       }
+      console.log("decoded in jwt verify", decoded);
+
       req.user = decoded.username;
       // console.log("verifyJWT: verified");
       next();

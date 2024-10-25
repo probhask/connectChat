@@ -220,9 +220,15 @@ export const refreshToken = async (req: Request, res: Response) => {
       res.sendStatus(403); //forbidden
       return;
     }
-    console.log("found  user:", foundUser._id, foundUser.refreshToken),
+    console.log(
+      "found  user:",
+      foundUser._id,
+      foundUser.refreshToken,
       foundUser.username,
-      refreshToken;
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET,
+      `${process.env.REFRESH_TOKEN_SECRET}`
+    );
 
     jwt.verify(
       refreshToken,
